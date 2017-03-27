@@ -2,7 +2,7 @@ var request = require('request');
 
 module.exports = function(controller){
 
-    controller.hears(['bill'],['ambient'],function(bot,message) {
+    controller.hears(['bill'],['ambient,direct_message,direct_mention,mention'],function(bot,message) {
 
         // do something 'random' when you talk about bill...
         var randomNumber = Math.floor(Math.random() * 3);
