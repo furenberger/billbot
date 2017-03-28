@@ -24,7 +24,8 @@ module.exports = function(controller){
                     bot.reply(message, jsonBody.items[pick].link);
                 }else{
                     var jsonErrorBody = JSON.parse(body);
-                    console.log('else' , jsonErrorBody.error.message)
+                    // console.log('else' , jsonErrorBody.error.message)
+                    bot.reply(jsonErrorBody.error.message);
                 }
             }).end('{}');
     });
