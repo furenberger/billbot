@@ -25,7 +25,7 @@ module.exports = function(controller){
                 }else{
                     var jsonErrorBody = JSON.parse(body);
                     // console.log('else' , jsonErrorBody.error.message)
-                    bot.reply(jsonErrorBody.error.message);
+                    bot.reply(message,jsonErrorBody.error.message);
                 }
             }).end('{}');
     });
