@@ -12,7 +12,7 @@ module.exports = function(controller){
                 url: url
             },
             function (error, response, body) {
-                console.log("BODY:", body);
+                //console.log("BODY:", body);
                 if (!error && response.statusCode === 200) {
                     var pick = Math.floor(Math.random() * 10);
                     // console.log('BODY: ', body);
@@ -24,7 +24,7 @@ module.exports = function(controller){
                     bot.reply(message, jsonBody.items[pick].link);
                 }else{
                     var jsonErrorBody = JSON.parse(body);
-                    console.log('else' , jsonErrorBody)
+                    console.log('else' , jsonErrorBody.error.message)
                 }
             }).end('{}');
     });
