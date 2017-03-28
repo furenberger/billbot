@@ -47,6 +47,16 @@ Object.keys(ifaces).forEach(function (ifname) {
 });
 
 
+var getIP = require('external-ip')();
+
+getIP(function (err, ip) {
+    if (err) {
+        // every service in the list has failed
+        throw err;
+    }
+    console.log(ip);
+});
+
 
 //dynamically pull in the skills!
 var normalizedPath = require("path").join(__dirname, "skills");
