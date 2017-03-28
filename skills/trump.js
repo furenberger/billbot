@@ -12,6 +12,10 @@ module.exports = function(controller){
                 url: url
             },
             function (error, response, body) {
+                if(error){
+                    console.log('error: ', error);
+                    console.log('response: ', response);
+                }
                 if (!error && response.statusCode === 200) {
                     var pick = Math.floor(Math.random() * 10);
                     console.log('BODY: ', body);
