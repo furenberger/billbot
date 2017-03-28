@@ -1,43 +1,51 @@
 var request = require('request');
+var chuckNorris = require('../helper/chucknorris');
+var emoji = require('../helper/emoji');
 
+/*
+    'Controller' for bills 'skills'
+ */
 module.exports = function(controller){
 
+    //Its a friendly bot, say hi
+    controller.hears(['hello', 'hi', 'hey'], 'direct_message,direct_mention,mention', function(bot, message) {
+
+        //add an emoji
+        emoji(bot, message);
+
+        //reply to the user, with the user name
+        bot.api.users.info({user:message.user},function(err,response) {
+            // console.log('user info');
+            if(!err){
+                var currentUser = response["user"];
+                // console.log(currentUser["name"]);
+                bot.reply(message,
+                    {
+                        text: 'Hi ' + currentUser["name"] + "!!"
+                    }
+                );
+            }
+        });
+    });
+
+    //you said his name!
     controller.hears(['bill'],['ambient,direct_message,direct_mention,mention'],function(bot,message) {
 
         // do something 'random' when you talk about bill...
-        var randomNumber = Math.floor(Math.random() * 3);
+        // var randomNumber = Math.floor(Math.random() * 5);
+        var randomNumber = 1;
         switch (randomNumber) {
-            case 1:
-                request({
-                        method: 'get',
-                        url: 'https://api.chucknorris.io/jokes/random'
-                    },
-                    function (error, response, body) {
-                        if (!error && response.statusCode === 200) {
-                            //console.log('BODY: ', body);
+            default:
+                //say something 'clever' about yourself
+                chuckNorris(bot, message);
 
-                            var jsonBody = JSON.parse(body);
-                            // console.log(jsonBody)
-
-                            var quote = jsonBody.value;
-                            var replacedQuote = quote.replace(new RegExp('Chuck Norris', 'gi'), 'Bill');
-                            bot.reply(message, replacedQuote);
-                        }
-                    }).end('{}');
                 break;
             case 2:
-                bot.api.reactions.add({
-                    timestamp: message.ts,
-                    channel: message.channel,
-                    name: 'bill_emoji',
-                }, function (err, res) {
-                    if (err) {
-                        bot.botkit.log('Failed to add emoji reaction :(', err);
-                    }
-                });
+                //emoji it!
+                emoji(bot, message);
                 break;
 
-            default:
+            case 1:
                 bot.startConversation(message, function (err, convo) {
                     if (!err) {
                         // create a path for when a user says YES

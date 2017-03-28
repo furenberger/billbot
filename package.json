@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/furenberger/billbot#readme",
   "dependencies": {
-    "botkit": "^0.5.2",
-    "external-ip": "^0.2.4"
+    "botkit": "^0.5.2"
   }
 }
