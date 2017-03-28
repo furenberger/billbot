@@ -2,7 +2,7 @@ var request = require('request');
 
 module.exports = function(controller){
 
-    controller.hears(['trump'],['ambient'],function(bot,message) {
+    controller.hears(['trump'],['ambient,direct_message,direct_mention,mention'],function(bot,message) {
         var start = Math.floor(Math.random() * 100);
         var url = 'https://www.googleapis.com/customsearch/v1?q=trump&num=10&start='+ start +'&cx=012059744610064128764%3Aocxi4odvnto&searchType=image&key=AIzaSyCvWsdLdIbTDhCJrj1GfNKijANwFXtseXc';
 
