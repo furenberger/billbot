@@ -32,8 +32,7 @@ module.exports = function(controller){
     controller.hears(['bill'],['ambient,direct_message,direct_mention,mention'],function(bot,message) {
 
         // do something 'random' when you talk about bill...
-        // var randomNumber = Math.floor(Math.random() * 5);
-        var randomNumber = 1;
+        var randomNumber = Math.floor(Math.random() * 4);
         switch (randomNumber) {
             default:
                 //say something 'clever' about yourself
