@@ -9,7 +9,7 @@ module.exports = function(bot, message){
         },
         function (error, response, body) {
             if (!error && response.statusCode === 200) {
-                // console.log('BODY: ', body);
+                console.log('BODY: ', body);
                 var insult = body.substring(body.indexOf('[CDATA[')+7,body.indexOf(']]'));
                 bot.reply(message, insult);
             }

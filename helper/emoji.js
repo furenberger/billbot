@@ -37,18 +37,18 @@ module.exports = function(bot, message, specific) {
         'you_dont_say'
     ];
     var index = Math.floor(Math.random() * emoji.length);
-    var emoji = emoji[index];
+    var pickedEmoji = emoji[index];
 
     if(specific){
-        emoji = specific;
+        pickedEmoji = specific;
     }
 
-    console.log("emoji: " + emoji);
+    console.log("emoji: " + pickedEmoji);
 
     bot.api.reactions.add({
         timestamp: message.ts,
         channel: message.channel,
-        name: emoji
+        name: pickedEmoji
     }, function (err, res) {
         if (err) {
             bot.botkit.log('Failed to add emoji reaction :(', err);
