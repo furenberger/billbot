@@ -82,10 +82,15 @@ slackController.hears(['hello', 'hi', 'hey'], 'direct_message,direct_mention,men
 });
 
 //you said <anything> time to get sassy
-slackController.hears(['.*'],['ambient,direct_message,direct_mention,mention'],function(bot,message) {
+slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention'],function(bot,message) {
     console.log('Slack message received for \'watson\': ', message.text);
 
     var text = message.text;
+    var searchMask = "bill";
+    var regEx = new RegExp(searchMask, "ig");
+    var replaceMask = "";
+
+    text = text.replace(regEx, replaceMask);
 
     //call a promise based function (tone API) and then do work.
     toneDetection.getTone(text, toneAnalyzer)
