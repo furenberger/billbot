@@ -57,7 +57,7 @@ require('fs').readdirSync(normalizedPath).forEach(function(file) {
 
 //Bill becomes sentient on his own today at this time, every day rip on epeterik.
 var billSay = schedule.scheduleJob('24 15 * * *', function(){
-    chuckNorris().then(function(quote){
+    insult().then(function(quote){
         slackBot.say(
             {
                 text: "Hey epeterik, " + quote,
