@@ -1,3 +1,7 @@
+var request = require('request');
+/*
+ a sample conversation
+ */
 module.exports = function(controller){
     controller.hears(['qme'], 'ambient,direct_message,direct_mention,mention', function(bot,message) {
 

@@ -31,12 +31,8 @@ function getTone(text, toneAnalyzer){
                 text: text
             }, function (error, data) {
                 if (error) {
-                    // console.log(data);
                     reject(error);
                 } else {
-                    // console.log(data);
-
-
                     // Extract the tones - emotion, language and social
                     if (data && data.document_tone) {
                         data.document_tone.tone_categories.forEach(function (toneCategory) {
@@ -46,7 +42,6 @@ function getTone(text, toneAnalyzer){
                         });
 
                         emotionToneSimple = getEmotionTone(emotionTone);
-                        // console.log('emotionTone: ', emotionToneSimple);
                     }
 
                     resolve(emotionToneSimple);
@@ -56,10 +51,9 @@ function getTone(text, toneAnalyzer){
             resolve('neutral');
         }
     });
-
 }
 
-
+//this comes back with a ton of things... lets simplify it
 function getEmotionTone(emotionTone) {
     var maxScore = 0.0;
     var primaryEmotion = null;

@@ -54,4 +54,4 @@ module.exports = function(bot, message, specific) {
             bot.botkit.log('Failed to add emoji reaction :(', err);
         }
     });
-}
+};
