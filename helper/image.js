@@ -28,7 +28,7 @@ module.exports = function(searchString) {
 
 
         var start = Math.floor(Math.random() * 25);
-        var url = 'https://www.googleapis.com/customsearch/v1?q=' + searchString + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;
+        var url = 'https://www.googleapis.com/customsearch/v1?q=' + encodeURIComponent(searchString) + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;
 
         if (process.env.GOOGLE_API_ENABLED === 'true') {
             request({
