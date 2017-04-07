@@ -12,8 +12,9 @@ module.exports = function(controller){
                 bot.reply(message, image);
             }).catch(function (err) {
                 bot.api.reactions.add({
-                    channel: '#general',
-                    name: 'mic_drop'
+                    timestamp: message.ts,
+                    channel: message.channel,
+                    name: 'aw_yeah'
                 }, function (err, res) {
                     if (err) {
                         bot.botkit.log('Failed to add emoji reaction :(', err);
@@ -29,7 +30,8 @@ module.exports = function(controller){
                 bot.reply(message, image);
             }).catch(function (err) {
                 bot.api.reactions.add({
-                    channel: '#general',
+                    timestamp: message.ts,
+                    channel: message.channel,
                     name: 'finger_hole'
                 }, function (err, res) {
                     if (err) {
@@ -52,7 +54,8 @@ module.exports = function(controller){
                     bot.reply(message, image);
                 }).catch(function(err){
                 bot.api.reactions.add({
-                    channel: '#general',
+                    timestamp: message.ts,
+                    channel: message.channel,
                     name: 'middle_finger'
                 }, function (err, res) {
                     if (err) {
