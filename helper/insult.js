@@ -1,3 +1,5 @@
+var request = require('request');
+
 /*
  generalize the request call to the insult api
  */

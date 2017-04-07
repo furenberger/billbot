@@ -12,6 +12,8 @@ if (!process.env.token) {
     process.exit(1);
 }
 
+var request = require('request');
+
 console.log("TONE_ENABLED: " + process.env.TONE_ENABLED);
 console.log("GOOGLE_API_ENABLED: " + process.env.GOOGLE_API_ENABLED);
 
@@ -113,9 +115,10 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                 case 'anger':
                 case 'disgust':
                 {
-                    insult().then(function(quote){
-                        bot.reply(message, quote);
-                    });
+                    insult()
+                        .then(function(quote){
+                            bot.reply(message, quote);
+                        });
                     break;
                 }
                 case 'fear':
