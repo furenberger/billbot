@@ -1,4 +1,5 @@
 var image = require('../helper/image');
+
 /*
     Listen to the keywords (in the 'hears') and do a google image search based
  */
@@ -31,7 +32,8 @@ module.exports = function(controller){
             image(text)
                 .then(function (image) {
                     bot.reply(message, image);
-                });
+                }).catch(function(err){
+            });
         }
     });
 };
