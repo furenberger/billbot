@@ -8,16 +8,34 @@ module.exports = function(controller){
     //sarah connor terminator genisys
     controller.hears(['sarah connor'],['ambient,direct_message'],function(bot,message) {
         image("sarah%20connor%20terminator%20genisys")
-            .then(function(image){
+            .then(function (image) {
                 bot.reply(message, image);
+            }).catch(function (err) {
+            slackBot.api.reactions.add({
+                channel: '#general',
+                name: 'mic_drop'
+            }, function (err, res) {
+                if (err) {
+                    bot.botkit.log('Failed to add emoji reaction :(', err);
+                }
+            });
         });
     });
 
     //trump
     controller.hears(['trump'],['ambient,direct_message'],function(bot,message) {
         image("trump")
-            .then(function(image){
+            .then(function (image) {
                 bot.reply(message, image);
+            }).catch(function (err) {
+            slackBot.api.reactions.add({
+                channel: '#general',
+                name: 'finger_hole'
+            }, function (err, res) {
+                if (err) {
+                    bot.botkit.log('Failed to add emoji reaction :(', err);
+                }
+            });
         });
     });
 
