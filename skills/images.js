@@ -11,14 +11,14 @@ module.exports = function(controller){
             .then(function (image) {
                 bot.reply(message, image);
             }).catch(function (err) {
-            bot.api.reactions.add({
-                channel: '#general',
-                name: 'mic_drop'
-            }, function (err, res) {
-                if (err) {
-                    bot.botkit.log('Failed to add emoji reaction :(', err);
-                }
-            });
+                bot.api.reactions.add({
+                    channel: '#general',
+                    name: 'mic_drop'
+                }, function (err, res) {
+                    if (err) {
+                        bot.botkit.log('Failed to add emoji reaction :(', err);
+                    }
+                });
         });
     });
 
@@ -28,14 +28,14 @@ module.exports = function(controller){
             .then(function (image) {
                 bot.reply(message, image);
             }).catch(function (err) {
-            bot.api.reactions.add({
-                channel: '#general',
-                name: 'finger_hole'
-            }, function (err, res) {
-                if (err) {
-                    bot.botkit.log('Failed to add emoji reaction :(', err);
-                }
-            });
+                bot.api.reactions.add({
+                    channel: '#general',
+                    name: 'finger_hole'
+                }, function (err, res) {
+                    if (err) {
+                        bot.botkit.log('Failed to add emoji reaction :(', err);
+                    }
+                });
         });
     });
 
@@ -51,7 +51,7 @@ module.exports = function(controller){
                 .then(function (image) {
                     bot.reply(message, image);
                 }).catch(function(err){
-                slackBot.api.reactions.add({
+                bot.api.reactions.add({
                     channel: '#general',
                     name: 'middle_finger'
                 }, function (err, res) {
