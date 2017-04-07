@@ -61,9 +61,13 @@ module.exports = function(searchString) {
                 function (error, response, body) {
                     if (!error && response.statusCode === 200) {
                         var jsonBody = JSON.parse(body);
-                        var flickrImage = 'https://farm'+jsonBody.photos.photo[pick].farm+'.staticflickr.com/'+jsonBody.photos.photo[pick].server+'/'+jsonBody.photos.photo[pick].id+'_'+jsonBody.photos.photo[pick].secret+'.jpg';
-
-                        resolve(flickrImage);
+                        if(jsonBody && jsonBody.photos && jsonBody.photos.photo[pick]) {
+                            var flickrImage = 'https://farm' + jsonBody.photos.photo[pick].farm + '.staticflickr.com/' + jsonBody.photos.photo[pick].server + '/' + jsonBody.photos.photo[pick].id + '_' + jsonBody.photos.photo[pick].secret + '.jpg';
+                            resolve(flickrImage);
+                        }
+                        else{
+                            reject();
+                        }
                     } else {
                         reject();
                     }
