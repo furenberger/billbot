@@ -6,7 +6,6 @@ var Socks = require('socks');
     generalize the request call to the google search api (well it still depends on bot)
  */
 module.exports = function(searchString) {
-    console.log('in tiem image')
     const fixieUrl = process.env.FIXIE_SOCKS_HOST;
     const fixieValues = fixieUrl.split(new RegExp('[/(:\\/@)/]+'));
 
@@ -62,7 +61,7 @@ module.exports = function(searchString) {
                 function (error, response, body) {
                     if (!error && response.statusCode === 200) {
                         var jsonBody = JSON.parse(body);
-                        var flickrImage = `https://farm${jsonBody.photos.photo[pick].farm}.staticflickr.com/${jsonBody.photos.photo[pick].server}/${jsonBody.photos.photo[pick].id}_${jsonBody.photos.photo[pick].secret}.jpg`;
+                        var flickrImage = 'https://farm'+jsonBody.photos.photo[pick].farm+'.staticflickr.com/'+jsonBody.photos.photo[pick].server+'/'+jsonBody.photos.photo[pick].id+'_'+jsonBody.photos.photo[pick].secret+'.jpg';
 
                         resolve(flickrImage);
                     } else {
