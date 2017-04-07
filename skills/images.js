@@ -11,7 +11,7 @@ module.exports = function(controller){
             .then(function (image) {
                 bot.reply(message, image);
             }).catch(function (err) {
-            slackBot.api.reactions.add({
+            bot.api.reactions.add({
                 channel: '#general',
                 name: 'mic_drop'
             }, function (err, res) {
@@ -28,7 +28,7 @@ module.exports = function(controller){
             .then(function (image) {
                 bot.reply(message, image);
             }).catch(function (err) {
-            slackBot.api.reactions.add({
+            bot.api.reactions.add({
                 channel: '#general',
                 name: 'finger_hole'
             }, function (err, res) {
