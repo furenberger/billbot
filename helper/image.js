@@ -13,9 +13,10 @@ module.exports = function(searchString) {
     var start = Math.floor(Math.random() * 25);
     var pick = Math.floor(Math.random() * 10);
 
-    var flickrUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + process.env.FLICKR_KEY + '&text=' + encodeURIComponent(searchString) + '&safe_search=3&format=json&nojsoncallback=1';
-    var googleUrl = 'https://www.googleapis.com/customsearch/v1?q=' + encodeURIComponent(searchString) + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;
+    var flickrUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + process.env.FLICKR_KEY + '&text=' + searchString + '&safe_search=3&format=json&nojsoncallback=1';
+    var googleUrl = 'https://www.googleapis.com/customsearch/v1?q=' + searchString + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;
 
+    console.log(googleUrl)
     const socksAgent = new Socks.Agent({
             proxy: {
                 ipaddress: fixieValues[2],
@@ -41,7 +42,12 @@ module.exports = function(searchString) {
                 function (error, response, body) {
                     if (!error && response.statusCode === 200) {
                         var jsonBody = JSON.parse(body);
-                        resolve(jsonBody.items[pick].link);
+                        console.log(Object.keys(jsonBody))
+                        if(jsonBody && jsonBody.items && jsonBody.items[pick] && jsonBody.items[pick].link) {
+                            resolve(jsonBody.items[pick].link);
+                        }else{
+                            reject();
+                        }
                     } else {
                         //google has the errorz
                         var jsonErrorBody = JSON.parse(body);
