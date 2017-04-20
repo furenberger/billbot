@@ -25,7 +25,7 @@ module.exports = function(controller){
 
     //trump
     controller.hears(['trump'],['ambient,direct_message'],function(bot,message) {
-        image("trump")
+        image('funny%20cat')
             .then(function (image) {
                 bot.reply(message, image);
             }).catch(function (err) {
