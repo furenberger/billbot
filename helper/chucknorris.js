@@ -16,7 +16,7 @@ module.exports = () => {
                     const jsonBody = JSON.parse(body);
                     const quote = jsonBody.value;
                     let replacedQuote = quote.replace(new RegExp('Chuck Norris', 'gi'), 'Bill');
-                    replacedQuote = quote.replace(new RegExp('Chuck', 'gi'), 'Bill');
+                    replacedQuote = replacedQuote.replace(new RegExp('Chuck', 'gi'), 'Bill');
                     resolve(replacedQuote);
                 }else{
                     reject('error');
