@@ -23,6 +23,7 @@ const chuckNorris = require('./helper/chucknorris');
 const emoji = require('./helper/emoji');
 const insult = require('./helper/insult');
 const watsonBot = require('./helper/watson');
+const giphy = require('./skills/giphy');
 
 const toneDetection = require('./addons/tone_detection');
 const watson = require('watson-developer-cloud');
@@ -130,9 +131,16 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                     break;
                 }
                 case 'fear':
-                case 'joy':
                 {
                     chuckNorris()
+                        .then((quote) => {
+                            bot.reply(message, quote);
+                        });
+                    break;
+                }
+                case 'joy':
+                {
+                    giphy()
                         .then((quote) => {
                             bot.reply(message, quote);
                         });
