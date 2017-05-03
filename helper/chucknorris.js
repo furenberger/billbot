@@ -15,7 +15,8 @@ module.exports = () => {
                 if (!error && response.statusCode === 200) {
                     const jsonBody = JSON.parse(body);
                     const quote = jsonBody.value;
-                    const replacedQuote = quote.replace(new RegExp('Chuck Norris', 'gi'), 'Bill');
+                    let replacedQuote = quote.replace(new RegExp('Chuck Norris', 'gi'), 'Bill');
+                    replacedQuote = quote.replace(new RegExp('Chuck', 'gi'), 'Bill');
                     resolve(replacedQuote);
                 }else{
                     reject('error');
