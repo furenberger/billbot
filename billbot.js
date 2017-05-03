@@ -60,6 +60,14 @@ require('fs').readdirSync(normalizedPath).forEach(function(file) {
     require('./skills/' + file)(slackController);
 });
 
+giphy().then((url) => {
+    slackBot.say(
+        {
+            text: url,
+            channel: '#bill_testing' // a valid slack channel, group, mpim, or im ID
+        });
+});
+
 //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
 const billSay = schedule.scheduleJob('25 15 * * *', () => {
     insult().then((quote) => {
