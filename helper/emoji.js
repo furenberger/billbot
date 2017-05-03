@@ -1,8 +1,11 @@
+'use strict';
+const debug = require('debug')('billbot:emoji');
+
 /*
     attach emoji to message
 */
-module.exports = function(bot, message, specific) {
-    var emoji = [
+module.exports = (bot, message, specific) => {
+    const emoji = [
         'bill_emoji',
         'bill_emoji',
         'bill_emoji',
@@ -36,8 +39,8 @@ module.exports = function(bot, message, specific) {
         'imposibru',
         'you_dont_say'
     ];
-    var index = Math.floor(Math.random() * emoji.length);
-    var pickedEmoji = emoji[index];
+    const index = Math.floor(Math.random() * emoji.length);
+    let pickedEmoji = emoji[index];
 
     if(specific){
         pickedEmoji = specific;
@@ -49,7 +52,7 @@ module.exports = function(bot, message, specific) {
         timestamp: message.ts,
         channel: message.channel,
         name: pickedEmoji
-    }, function (err, res) {
+    }, (err, res) => {
         if (err) {
             bot.botkit.log('Failed to add emoji reaction :(', err);
         }

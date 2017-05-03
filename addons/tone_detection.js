@@ -1,9 +1,10 @@
-var Promise = require('bluebird');
+'use strict';
+const debug = require('debug')('billbot:tone_detection');
 
 /**
  * Labels for the tone categories returned by the Watson Tone Analyzer
  */
-var EMOTION_TONE_LABEL = 'emotion_tone';
+const EMOTION_TONE_LABEL = 'emotion_tone';
 
 /**
  * Thresholds for identifying meaningful tones returned by the Watson Tone
@@ -12,30 +13,23 @@ var EMOTION_TONE_LABEL = 'emotion_tone';
  * https://www.ibm.com/watson/developercloud/doc/tone-analyzer/understanding-tone.shtml
  * These thresholds can be adjusted to client/domain requirements.
  */
-var PRIMARY_EMOTION_SCORE_THRESHOLD = 0.5;
+const PRIMARY_EMOTION_SCORE_THRESHOLD = 0.5;
 
-
-/**
- * Public functions for this module
- */
-module.exports = {
-    getTone: getTone
-};
-
-
-function getTone(text, toneAnalyzer){
-    return new Promise(function(resolve, reject) {
+const getTone = (text, toneAnalyzer) => {
+    return new Promise((resolve, reject) => {
         if(process.env.TONE_ENABLED === 'true') {
             //API call to tone analyzer
             toneAnalyzer.tone({
                 text: text
-            }, function (error, data) {
+            }, (error, data) => {
                 if (error) {
                     reject(error);
                 } else {
+                    let emotionTone = '';
+                    let emotionToneSimple = '';
                     // Extract the tones - emotion, language and social
                     if (data && data.document_tone) {
-                        data.document_tone.tone_categories.forEach(function (toneCategory) {
+                        data.document_tone.tone_categories.forEach((toneCategory) => {
                             if (toneCategory.category_id === EMOTION_TONE_LABEL) {
                                 emotionTone = toneCategory;
                             }
@@ -51,15 +45,15 @@ function getTone(text, toneAnalyzer){
             resolve('neutral');
         }
     });
-}
+};
 
 //this comes back with a ton of things... lets simplify it
-function getEmotionTone(emotionTone) {
-    var maxScore = 0.0;
-    var primaryEmotion = null;
-    var primaryEmotionScore = null;
+const getEmotionTone = (emotionTone) => {
+    let maxScore = 0.0;
+    let primaryEmotion = null;
+    let primaryEmotionScore = null;
 
-    emotionTone.tones.forEach(function(tone) {
+    emotionTone.tones.forEach((tone) => {
         if (tone.score > maxScore) {
             maxScore = tone.score;
             primaryEmotion = tone.tone_name.toLowerCase();
@@ -74,4 +68,11 @@ function getEmotionTone(emotionTone) {
 
     //just return that emotion
     return primaryEmotion;
-}
+};
+
+/**
+ * Public functions for this module
+ */
+module.exports = {
+    getTone
+};

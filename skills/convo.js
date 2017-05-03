@@ -1,11 +1,14 @@
-var request = require('request');
+'use strict';
+const debug = require('debug')('billbot:convo');
+const request = require('request');
+
 /*
  a sample conversation
  */
-module.exports = function(controller){
-    controller.hears(['qme'], 'ambient,direct_message,direct_mention,mention', function(bot,message) {
+module.exports = (controller) => {
+    controller.hears(['qme'], 'ambient,direct_message,direct_mention,mention', (bot,message) => {
 
-        bot.createConversation(message, function(err, convo) {
+        bot.createConversation(message, (err, convo) => {
 
             // create a path for when a user says YES
             convo.addMessage({
@@ -28,19 +31,19 @@ module.exports = function(controller){
             convo.ask('Do you like cheese?', [
                 {
                     pattern: 'yes',
-                    callback: function(response, convo) {
+                    callback: (response, convo) => {
                         convo.gotoThread('yes_thread');
                     }
                 },
                 {
                     pattern: 'no',
-                    callback: function(response, convo) {
+                    callback: (response, convo) => {
                         convo.gotoThread('no_thread');
                     }
                 },
                 {
                     default: true,
-                    callback: function(response, convo) {
+                    callback: (response, convo) => {
                         convo.gotoThread('bad_response');
                     }
                 }

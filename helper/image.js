@@ -1,22 +1,24 @@
-var request = require('request');
-var Promise = require('bluebird');
-var Socks = require('socks');
+'use strict';
+const debug = require('debug')('billbot:image');
+
+const request = require('request');
+const Socks = require('socks');
 
 /*
     generalize the request call to the google search api (well it still depends on bot)
  */
-module.exports = function(searchString) {
+module.exports = (searchString) => {
     const fixieUrl = process.env.FIXIE_SOCKS_HOST;
     const fixieValues = fixieUrl.split(new RegExp('[/(:\\/@)/]+'));
 
     //from 25 pages pick random number
-    var start = Math.floor(Math.random() * 25);
-    var pick = Math.floor(Math.random() * 10);
+    const start = Math.floor(Math.random() * 25);
+    const pick = Math.floor(Math.random() * 10);
 
-    var flickrUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + process.env.FLICKR_KEY + '&text=' + searchString + '&safe_search=3&format=json&nojsoncallback=1';
-    var googleUrl = 'https://www.googleapis.com/customsearch/v1?q=' + searchString + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;
+    const flickrUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + process.env.FLICKR_KEY + '&text=' + searchString + '&safe_search=3&format=json&nojsoncallback=1';
+    const googleUrl = 'https://www.googleapis.com/customsearch/v1?q=' + searchString + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;
 
-    console.log(googleUrl)
+    // console.log(googleUrl);
     const socksAgent = new Socks.Agent({
             proxy: {
                 ipaddress: fixieValues[2],
@@ -32,17 +34,16 @@ module.exports = function(searchString) {
         false // rejectUnauthorized option passed to tls.connect()
     );
 
-    var googleImage = function () {
-        return new Promise(function (resolve, reject) {
+    const googleImage = () => {
+        return new Promise((resolve, reject) => {
             request({
                     method: 'get',
                     url: googleUrl,
                     agent: socksAgent
                 },
-                function (error, response, body) {
+                 (error, response, body) => {
                     if (!error && response.statusCode === 200) {
-                        var jsonBody = JSON.parse(body);
-                        console.log(Object.keys(jsonBody))
+                        const jsonBody = JSON.parse(body);
                         if(jsonBody && jsonBody.items && jsonBody.items[pick] && jsonBody.items[pick].link) {
                             resolve(jsonBody.items[pick].link);
                         }else{
@@ -50,25 +51,25 @@ module.exports = function(searchString) {
                         }
                     } else {
                         //google has the errorz
-                        var jsonErrorBody = JSON.parse(body);
-                        console.log("Google error: ", jsonErrorBody.error.message);
+                        const jsonErrorBody = JSON.parse(body);
+                        // console.log("Google error: ", jsonErrorBody.error.message);
                         reject();
                     }
                 }).end('{}');
         });
     };
 
-    var flickrImage = function () {
-        return new Promise(function (resolve, reject) {
+    const flickrImage = () => {
+        return new Promise((resolve, reject) => {
             request({
                     method: 'get',
                     url: flickrUrl
                 },
-                function (error, response, body) {
+                (error, response, body) => {
                     if (!error && response.statusCode === 200) {
-                        var jsonBody = JSON.parse(body);
+                        const jsonBody = JSON.parse(body);
                         if(jsonBody && jsonBody.photos && jsonBody.photos.photo[pick]) {
-                            var flickrImage = 'https://farm' + jsonBody.photos.photo[pick].farm + '.staticflickr.com/' + jsonBody.photos.photo[pick].server + '/' + jsonBody.photos.photo[pick].id + '_' + jsonBody.photos.photo[pick].secret + '.jpg';
+                            const flickrImage = 'https://farm' + jsonBody.photos.photo[pick].farm + '.staticflickr.com/' + jsonBody.photos.photo[pick].server + '/' + jsonBody.photos.photo[pick].id + '_' + jsonBody.photos.photo[pick].secret + '.jpg';
                             resolve(flickrImage);
                         }
                         else{
@@ -82,17 +83,17 @@ module.exports = function(searchString) {
         });
     };
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         googleImage()
-            .then(function (url) {
+            .then((url) => {
                 //success on googles
                 resolve(url)
-            }).catch(function (err) {
+            }).catch((err) => {
                 flickrImage()
-                    .then(function(url){
+                    .then((url) => {
                         //success on flicka
                         resolve(url);
-                    }).catch(function(err){
+                    }).catch((err) => {
                         reject();
                 });
         });
