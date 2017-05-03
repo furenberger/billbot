@@ -64,7 +64,7 @@ giphy().then((url) => {
     slackBot.say(
         {
             text: url,
-            channel: '#bill_testing' // a valid slack channel, group, mpim, or im ID
+            channel: '#general' // a valid slack channel, group, mpim, or im ID
         });
 });
 
