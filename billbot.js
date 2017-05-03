@@ -59,24 +59,28 @@ require('fs').readdirSync(normalizedPath).forEach(function(file) {
     require('./skills/' + file)(slackController);
 });
 
-//Bill becomes sentient on his own today at this time, every day rip on epeterik.
-const billSay = schedule.scheduleJob('24 15 * * *', () => {
+//Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
+const billSay = schedule.scheduleJob('25 15 * * *', () => {
     insult().then((quote) => {
         slackBot.say(
             {
                 text: "Hey epeterik, " + quote,
                 channel: '#general' // a valid slack channel, group, mpim, or im ID
             }
-        );
+            ,(err, worker, message) => {
+                debug('ERR: ', err, 'WORK: ', worker, 'MSG: ', message);
 
-        slackBot.api.reactions.add({
-            channel: '#general',
-            name: 'mooning'
-        }, (err, res) => {
-            if (err) {
-                bot.botkit.log('Failed to add emoji reaction :(', err);
-            }
-        });
+                slackBot.api.reactions.add({
+                    channel: 'C4E3L7CQ6',  //bill_testing = C4SKTL527
+                    name: 'mooning',
+                    timestamp: worker.message.ts
+                }, (err, res) => {
+                    if (err) {
+                        debug('Failed to add emoji reaction :(', err);
+                    }
+                });
+
+            });
     });
 });
 

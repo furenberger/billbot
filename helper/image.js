@@ -3,6 +3,7 @@ const debug = require('debug')('billbot:image');
 
 const request = require('request');
 const Socks = require('socks');
+const randomnumber = require('../addons/randomnumber');
 
 /*
     generalize the request call to the google search api (well it still depends on bot)
@@ -12,8 +13,8 @@ module.exports = (searchString) => {
     const fixieValues = fixieUrl.split(new RegExp('[/(:\\/@)/]+'));
 
     //from 25 pages pick random number
-    const start = Math.floor(Math.random() * 25);
-    const pick = Math.floor(Math.random() * 10);
+    const start = randomnumber(0, 25);
+    const pick = randomnumber(0, 10);
 
     const flickrUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + process.env.FLICKR_KEY + '&text=' + searchString + '&safe_search=3&format=json&nojsoncallback=1';
     const googleUrl = 'https://www.googleapis.com/customsearch/v1?q=' + searchString + '&num=10&start=' + start + '&cx=' + process.env.googlecx + '&searchType=image&key=' + process.env.googleapi;

@@ -6,7 +6,6 @@ const image = require('../helper/image');
     Listen to the keywords (in the 'hears') and do a google image search based
  */
 module.exports = (controller) => {
-
     //sarah connor terminator genisys
     controller.hears(['sarah connor'],['ambient,direct_message'],(bot,message) => {
         image("sarah%20connor%20terminator%20genisys")
@@ -19,7 +18,7 @@ module.exports = (controller) => {
                     name: 'aw_yeah'
                 }, function (err, res) {
                     if (err) {
-                        bot.botkit.log('Failed to add emoji reaction :(', err);
+                        debug('Failed to add emoji reaction :(', err);
                     }
                 });
         });
@@ -37,7 +36,7 @@ module.exports = (controller) => {
                     name: 'finger_hole'
                 }, (err, res)  =>{
                     if (err) {
-                        bot.botkit.log('Failed to add emoji reaction :(', err);
+                        debug('Failed to add emoji reaction :(', err);
                     }
                 });
         });
@@ -61,7 +60,7 @@ module.exports = (controller) => {
                     name: 'middle_finger'
                 }, (err, res) => {
                     if (err) {
-                        bot.botkit.log('Failed to add emoji reaction :(', err);
+                        debug('Failed to add emoji reaction :(', err);
                     }
                 });
             });

@@ -8,7 +8,7 @@ const randomnumber = require('../addons/randomnumber');
  */
 module.exports = () => {
     const index = randomnumber(0, 1);
-    debug('index :' + index);
+
     switch (index){
         case 0: {
             return new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ module.exports = () => {
                         if (!error && response.statusCode === 200) {
                             debug('BODY: ', body);
                             const insult = body.substring(body.indexOf('[CDATA[') + 7, body.indexOf(']]'));
-                            resolve(insult);
+                            resolve(insult.trim());
                         } else {
                             reject(error);
                         }
@@ -40,7 +40,7 @@ module.exports = () => {
                             const $ = cheerio.load(body);
                             const insult = $('h1').last().text(); //get the text of the last h1 (the insult)
                             debug('insult', insult);
-                            resolve(insult);
+                            resolve(insult.trim());
                         } else {
                             reject(error);
                         }
