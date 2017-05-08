@@ -98,18 +98,18 @@ const searchChannel = () => {
             });
 
             //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
-            schedule.scheduleJob('44 10 * * *', () => {
+            schedule.scheduleJob('47 15 * * *', () => {
                 insult().then((quote) => {
                     slackBot.say(
                         {
                             text: "Hey epeterik, " + quote,
-                            channel: CHANNELS[activeChannel].channel
+                            channel: CHANNELS[activeChannel].name
                         }
                         , (err, worker, message) => {
                             debug('ERR: ', err, 'WORK: ', worker, 'MSG: ', message);
 
                             slackBot.api.reactions.add({
-                                channel: CHANNELS[activeChannel].channel,
+                                channel: CHANNELS[activeChannel].name,
                                 name: 'mooning',
                                 timestamp: worker.message.ts
                             }, (err, res) => {
