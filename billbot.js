@@ -74,7 +74,7 @@ const CHANNELS = [
 
 let activeChannel = 0;
 
-const searchChannel = (cb) => {
+const searchChannel = () => {
     // Figure out what channel we are on
     slackBot.api.channels.info(
         {
@@ -98,7 +98,7 @@ const searchChannel = (cb) => {
             });
 
             //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
-            schedule.scheduleJob('25 15 * * *', () => {
+            schedule.scheduleJob('44 10 * * *', () => {
                 insult().then((quote) => {
                     slackBot.say(
                         {
