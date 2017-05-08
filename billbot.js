@@ -60,38 +60,71 @@ require('fs').readdirSync(normalizedPath).forEach(function(file) {
     require('./skills/' + file)(slackController);
 });
 
-giphy().then((url) => {
-    slackBot.say(
+const CHANNELS = [
+    {
+        team     : 'weUsedToRunAnnuities',
+        channel  : 'C4E3L7CQ6',
+        name     : '#general'
+    },
+    {
+        team     : 'furenberger',
+        channel  : 'C4SKTL527',
+        name     : '#bill_testing'
+    }];
+
+let activeChannel = 0;
+
+const searchChannel = (cb) => {
+    // Figure out what channel we are on
+    slackBot.api.channels.info(
         {
-            text: url,
-            channel: '#bill_testing' // a valid slack channel, group, mpim, or im ID
-        });
-});
-
-//Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
-const billSay = schedule.scheduleJob('25 15 * * *', () => {
-    insult().then((quote) => {
-        slackBot.say(
-            {
-                text: "Hey epeterik, " + quote,
-                channel: '#general' // a valid slack channel, group, mpim, or im ID
+            channel: CHANNELS[activeChannel].channel
+        },
+        function(err,response) {
+            if(err){
+                debug('error looking at channel: ' + activeChannel);
+                activeChannel = activeChannel + 1;
+                searchChannel();
             }
-            ,(err, worker, message) => {
-                debug('ERR: ', err, 'WORK: ', worker, 'MSG: ', message);
 
-                slackBot.api.reactions.add({
-                    channel: 'C4E3L7CQ6',  //bill_testing = C4SKTL527
-                    name: 'mooning',
-                    timestamp: worker.message.ts
-                }, (err, res) => {
-                    if (err) {
-                        debug('Failed to add emoji reaction :(', err);
-                    }
-                });
+            debug('Found current channel (from list) ' + CHANNELS[activeChannel].team + ' ' + CHANNELS[activeChannel].channel + ' ' + CHANNELS[activeChannel].name);
 
+            giphy().then((url) => {
+                slackBot.say(
+                    {
+                        text: url,
+                        channel: CHANNELS[activeChannel].channel
+                    });
             });
-    });
-});
+
+            //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
+            schedule.scheduleJob('25 15 * * *', () => {
+                insult().then((quote) => {
+                    slackBot.say(
+                        {
+                            text: "Hey epeterik, " + quote,
+                            channel: CHANNELS[activeChannel].channel
+                        }
+                        , (err, worker, message) => {
+                            debug('ERR: ', err, 'WORK: ', worker, 'MSG: ', message);
+
+                            slackBot.api.reactions.add({
+                                channel: CHANNELS[activeChannel].channel,
+                                name: 'mooning',
+                                timestamp: worker.message.ts
+                            }, (err, res) => {
+                                if (err) {
+                                    debug('Failed to add emoji reaction :(', err);
+                                }
+                            });
+
+                        });
+                });
+            });
+        });
+};
+
+searchChannel();
 
 /*
  Start the 'Controller' for bills 'skills'
