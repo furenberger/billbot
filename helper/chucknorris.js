@@ -1,6 +1,6 @@
 'use strict';
 const request = require('request');
-const debug = require('debug')('billbot:billbot');
+const debug = require('debug')('billbot:chucknorris');
 
 /*
  generalize the request call to the chuck norris api
@@ -21,6 +21,6 @@ module.exports = () => {
                 }else{
                     reject('error');
                 }
-            }).end('{}');
+            });
     });
 };

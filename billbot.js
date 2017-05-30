@@ -24,6 +24,7 @@ const emoji = require('./helper/emoji');
 const insult = require('./helper/insult');
 const watsonBot = require('./helper/watson');
 const giphy = require('./skills/giphy');
+const quote = require('./helper/quote');
 
 const toneDetection = require('./addons/tone_detection');
 const watson = require('watson-developer-cloud');
@@ -97,6 +98,15 @@ const searchChannel = () => {
                     });
             });
 
+            quote().then((quote) => {
+               slackBot.say(
+                   {
+                       text: quote,
+                       channel: CHANNELS[activeChannel].channel
+                   }
+               )
+            });
+
             //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
             schedule.scheduleJob('47 15 * * *', () => {
                 insult().then((quote) => {
@@ -163,9 +173,16 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
             //tones are limited to anger, disgust, fear, joy, and sadness, neutral
             switch(tone){
                 case 'anger':
-                case 'disgust':
                 {
                     insult()
+                        .then((quote) => {
+                            bot.reply(message, quote);
+                        });
+                    break;
+                }
+                case 'disgust':
+                {
+                    quote()
                         .then((quote) => {
                             bot.reply(message, quote);
                         });
@@ -189,6 +206,10 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                 }
                 case 'sadness':
                 {
+                    quote()
+                        .then((quote) => {
+                        bot.reply(message, quote);
+                    });
                     break;
                 }
                 case 'neutral':
