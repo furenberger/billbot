@@ -22,23 +22,17 @@ console.log("GOOGLE_API_ENABLED: " + process.env.GOOGLE_API_ENABLED);
 const chuckNorris = require('./helper/chucknorris');
 const emoji = require('./helper/emoji');
 const insult = require('./helper/insult');
-const watsonBot = require('./helper/watson');
-const giphy = require('./skills/giphy');
+const giphy = require('./helper/giphy');
 const quote = require('./helper/quote');
 const speak = require('./helper/speak');
+
+const randomnumber = require('./addons/randomnumber');
 
 const toneDetection = require('./addons/tone_detection');
 const watson = require('watson-developer-cloud');
 
 const Botkit = require('botkit');
 const schedule = require('node-schedule');
-
-const watsonMiddleware = require('botkit-middleware-watson')({
-    username: process.env.CONVERSATION_USERNAME,
-    password: process.env.CONVERSATION_PASSWORD,
-    workspace_id: process.env.WORKSPACE_ID,
-    version_date: '2017-02-03'
-});
 
 // Instantiate the Watson Tone Analyzer Service as per WDC 2.2.0
 const toneAnalyzer = new watson.ToneAnalyzerV3({
@@ -82,31 +76,36 @@ const searchChannel = () => {
         {
             channel: CHANNELS[activeChannel].channel
         },
-        function(err,response) {
+        (err,response) => {
             if(err){
                 debug('error looking at channel: ' + activeChannel);
                 activeChannel = activeChannel + 1;
-                searchChannel();
+                return searchChannel();
             }
 
             debug('Found current channel (from list) ' + CHANNELS[activeChannel].team + ' ' + CHANNELS[activeChannel].channel + ' ' + CHANNELS[activeChannel].name);
 
-            giphy().then((url) => {
-                slackBot.say(
-                    {
-                        text: url,
-                        channel: CHANNELS[activeChannel].channel
-                    });
-            });
+            setTimeout(() => {
+                giphy().then((url) => {
+                    slackBot.say(
+                        {
+                            text: url,
+                            channel: CHANNELS[activeChannel].channel
+                        });
+                });
+            }, randomnumber(0, 30000));
 
-            quote().then((quote) => {
-               slackBot.say(
-                   {
-                       text: quote,
-                       channel: CHANNELS[activeChannel].channel
-                   }
-               )
-            });
+
+            setTimeout(() => {
+                quote().then((quote) => {
+                    slackBot.say(
+                        {
+                            text: quote,
+                            channel: CHANNELS[activeChannel].channel
+                        }
+                    )
+                });
+            }, randomnumber(0, 100000));
 
             //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
             schedule.scheduleJob('47 15 * * *', () => {
@@ -169,7 +168,10 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
     //call a promise based function (tone API) and then do work.
     toneDetection.getTone(text, toneAnalyzer)
         .then(((tone) => {
-            watsonBot(bot, message, watsonMiddleware);
+            speak()
+                .then((text) => {
+                    bot.reply(message, text);
+                });
 
             //tones are limited to anger, disgust, fear, joy, and sadness, neutral
             switch(tone){
@@ -231,6 +233,4 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
             }
         }));
 });
-
-
 

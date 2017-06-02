@@ -39,6 +39,7 @@ module.exports = () => {
                     // debug('quote: ', body.content);
                     const $ = cheerio.load(body.content);
                     const quote = $('a[title="view quote"]').eq(item).text(); //get the text of the title view quote and a random number from that HTML
+                    debug('quote: ' + quote);
                     resolve(quote);
                 } else {
                     debug('quote error: ', error);

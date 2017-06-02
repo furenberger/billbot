@@ -48,17 +48,16 @@ module.exports = (searchString) => {
                         if(jsonBody && jsonBody.items && jsonBody.items[pick] && jsonBody.items[pick].link) {
                             resolve(jsonBody.items[pick].link);
                         }else{
+                            debug('google reject!');
                             reject();
                         }
                     } else {
-                        //google has the errorz
-                        const jsonErrorBody = JSON.parse(body);
+                        // google has the errorz
+                        // const jsonErrorBody = JSON.parse(body);
                         // console.log("Google error: ", jsonErrorBody.error.message);
                         reject();
                     }
                 }).end('{}');
-        }).catch((error) => {
-            debug('promise error: ', error);
         });
     };
 
@@ -76,14 +75,14 @@ module.exports = (searchString) => {
                             resolve(flickrImage);
                         }
                         else{
+                            debug('flickr issues!');
                             reject();
                         }
                     } else {
+                        debug('flickr reject!');
                         reject();
                     }
                 }).end('{}');
-        }).catch((error) => {
-            debug('promise error: ', error);
         });
     };
 
@@ -93,6 +92,7 @@ module.exports = (searchString) => {
                 //success on googles
                 resolve(url)
             }).catch((err) => {
+                debug('the googles had issues:' + err);
                 flickrImage()
                     .then((url) => {
                         //success on flicka
@@ -102,7 +102,7 @@ module.exports = (searchString) => {
                 });
         });
     }).catch((error) => {
-        debug('promise error: ', error);
+        debug('general promise error: ', error);
     });
 };
 

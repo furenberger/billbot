@@ -1,7 +1,6 @@
 'use strict';
 const debug = require('debug')('billbot:giphy');
 const request = require('request');
-const randomnumber = require('../addons/randomnumber');
 
 module.exports = () => {
     return new Promise((resolve, reject) => {

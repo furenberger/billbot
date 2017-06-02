@@ -22,6 +22,16 @@ module.exports = (controller) => {
         getImage('meme', bot, message);
     });
 
+    //karl
+    controller.hears(['karl'],['ambient,direct_message'],(bot,message) => {
+        getImage('karl schroepfer', bot, message);
+    });
+
+    //eric
+    controller.hears(['eric'],['ambient,direct_message'],(bot,message) => {
+        getImage('metamucil', bot, message);
+    });
+
     //allow user to say image {search}
     controller.hears(['image'],['ambient,direct_message'],(bot,message) => {
         let text = message.text;
