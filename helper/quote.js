@@ -45,5 +45,7 @@ module.exports = () => {
                     reject('error');
                 }
             });
+    }).catch((error) => {
+        debug('promise error: ', error);
     });
 };

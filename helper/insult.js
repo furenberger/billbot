@@ -27,6 +27,8 @@ module.exports = () => {
                             reject(error);
                         }
                     }).end('{}');
+            }).catch((error) => {
+                debug('promise error: ', error);
             });
         }
         case 1: {
@@ -45,6 +47,8 @@ module.exports = () => {
                             reject(error);
                         }
                     }).end('{}');
+            }).catch((error) => {
+                debug('promise error: ', error);
             });
         }
     }

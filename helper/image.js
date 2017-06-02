@@ -57,6 +57,8 @@ module.exports = (searchString) => {
                         reject();
                     }
                 }).end('{}');
+        }).catch((error) => {
+            debug('promise error: ', error);
         });
     };
 
@@ -80,7 +82,8 @@ module.exports = (searchString) => {
                         reject();
                     }
                 }).end('{}');
-
+        }).catch((error) => {
+            debug('promise error: ', error);
         });
     };
 
@@ -98,6 +101,8 @@ module.exports = (searchString) => {
                         reject();
                 });
         });
+    }).catch((error) => {
+        debug('promise error: ', error);
     });
 };
 

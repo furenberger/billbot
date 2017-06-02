@@ -13,5 +13,7 @@ module.exports = () => {
 
             resolve(gifUrl);
         });
+    }).catch((error) => {
+        debug('promise error: ', error);
     });
 };

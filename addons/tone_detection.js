@@ -44,6 +44,8 @@ const getTone = (text, toneAnalyzer) => {
         }else{
             resolve('neutral');
         }
+    }).catch((error) => {
+        debug('promise error: ', error);
     });
 };
 

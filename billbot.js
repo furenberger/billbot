@@ -25,6 +25,7 @@ const insult = require('./helper/insult');
 const watsonBot = require('./helper/watson');
 const giphy = require('./skills/giphy');
 const quote = require('./helper/quote');
+const speak = require('./helper/speak');
 
 const toneDetection = require('./addons/tone_detection');
 const watson = require('watson-developer-cloud');
@@ -215,6 +216,10 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                 case 'neutral':
                 {
                     emoji(bot, message);
+                    speak()
+                        .then((text) => {
+                            bot.reply(message, text);
+                        });
                     break;
                 }
                 default:
