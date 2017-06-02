@@ -218,10 +218,6 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                 case 'neutral':
                 {
                     emoji(bot, message);
-                    speak()
-                        .then((text) => {
-                            bot.reply(message, text);
-                        });
                     break;
                 }
                 default:
