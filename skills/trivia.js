@@ -10,19 +10,21 @@ module.exports = (controller) => {
 
         getTrivia()
             .then((trivia) => {
-                let answerList = trivia.incorrect_answers.concat(trivia.correct_answer);
-                answerList = shuffle(answerList);
-
-                const answers = answerList.join(', ');
-
-                const question = trivia.question + "  " +  answers;
+                let question = trivia.question + "  " +  trivia.answerList;
 
                 // start a conversation to handle this response.
                 bot.startConversation(message, (err,convo) => {
+                    convo.setTimeout(120000);
+                    convo.onTimeout((convo) => {
+
+                        convo.say('Oh no! The time limit has expired.  The correct answer was: ' + trivia.answer);
+                        convo.next();
+
+                    });
 
                     convo.addQuestion(question,[
                         {
-                            pattern: trivia.correct_answer,
+                            pattern: trivia.answer,
                             callback: (response,convo) => {
                                 convo.say('WINNER!');
                                 convo.next();
@@ -32,7 +34,12 @@ module.exports = (controller) => {
                             default: true,
                             callback: (response,convo) => {
                                 // YOU GOT IT WRONG
-                                convo.say('Fail.');
+                                convo.say(':sonic-wait:');
+                                if(convo.sent[0].text.indexOf(response.text) > 0){
+                                    let replace = response.text;
+                                    convo.sent[0].text = convo.sent[0].text.replace(replace,'');
+                                    convo.sent[0].text = convo.sent[0].text.replace(', ,',',');
+                                }
                                 convo.repeat();
                                 convo.next();
                             }
@@ -86,6 +93,11 @@ const mapQuestion = (triviaDbQuestion) => {
     triviaDbQuestion.question = decodeURIComponent(triviaDbQuestion.question);
     triviaDbQuestion.points = triviaDbQuestion.difficulty === 'hard' ? 3 : triviaDbQuestion.difficulty === 'medium' ? 2 : 1;
     triviaDbQuestion.category = decodeURIComponent(triviaDbQuestion.category);
+    triviaDbQuestion.answerList =  triviaDbQuestion.incorrect_answers.concat(triviaDbQuestion.answer);
+    triviaDbQuestion.answerList =  shuffle(triviaDbQuestion.answerList);
+    triviaDbQuestion.answerList =  triviaDbQuestion.answerList.join(', ');
+    triviaDbQuestion.answerList = decodeURIComponent(triviaDbQuestion.answerList);
+
     // debug('out: ' , triviaDbQuestion);
 
     return triviaDbQuestion
