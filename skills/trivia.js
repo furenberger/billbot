@@ -35,10 +35,22 @@ module.exports = (controller) => {
                             callback: (response,convo) => {
                                 // YOU GOT IT WRONG
                                 convo.say(':sonic-wait:');
-                                if(convo.sent[0].text.indexOf(response.text) > 0){
-                                    let replace = response.text;
-                                    convo.sent[0].text = convo.sent[0].text.replace(replace,'');
-                                    convo.sent[0].text = convo.sent[0].text.replace(', ,',',');
+
+                                let convoText = convo.sent[convo.sent.length-1].text;
+                                if(convoText.indexOf(response.text) > 0){
+                                    let replace = response.text.trim() + ', ';
+                                    convoText = convoText.replace(replace,'').trim();
+
+                                    replace = response.text.trim();
+                                    convoText = convoText.replace(replace,'').trim();
+
+                                    convoText = convoText.replace(', ,',',');
+
+                                    if(convoText.endsWith(',')){
+                                        convoText = convoText.substr(0,convoText.length-1);
+                                    }
+
+                                    convo.sent[convo.sent.length-1].text = convoText;
                                 }
                                 convo.repeat();
                                 convo.next();
