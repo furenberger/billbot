@@ -18,7 +18,7 @@
     "url": "https://github.com/furenberger/billbot/issues"
   },
   "engines": {
-    "node": "6.9.5"
+    "node": "6.11.1"
   },
   "homepage": "https://github.com/furenberger/billbot#readme",
   "dependencies": {
@@ -28,7 +28,7 @@
     "node-schedule": "^1.2.1",
     "request": "^2.81.0",
     "socks": "^1.1.10",
-    "watson-developer-cloud": "^2.33.0"
+    "watson-developer-cloud": "^2.34.0"
   },
   "devDependencies": {
     "debug": "^2.6.8"
