@@ -28,9 +28,7 @@
     "node-schedule": "^1.2.1",
     "request": "^2.81.0",
     "socks": "^1.1.10",
-    "watson-developer-cloud": "^2.34.0"
-  },
-  "devDependencies": {
+    "watson-developer-cloud": "^2.34.0",
     "debug": "^2.6.8"
   }
 }
