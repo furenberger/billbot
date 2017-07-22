@@ -148,6 +148,9 @@ module.exports = () => {
         "Cbop-Chop",
         "Im sorry Dave, Im afraid I cant do that",
         "I spy with my little eye...",
+        "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "https://www.youtube.com/watch?v=1qN72LEQnaU",
+        "https://www.youtube.com/watch?v=QH2-TGUlwu4",
         ""
     ];
 
