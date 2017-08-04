@@ -7,7 +7,7 @@ const image = require('../helper/image');
  */
 module.exports = (controller) => {
     //sarah connor terminator genisys
-    controller.hears(['sarah connor'],['ambient,direct_message'],(bot,message) => {
+    controller.hears(['sarah connor','sara', 'connor', 'conner'],['ambient,direct_message'],(bot,message) => {
         getImage("sarah%20connor%20terminator%20genisys", bot, message);
     });
 
@@ -22,13 +22,23 @@ module.exports = (controller) => {
         getImage('meme', bot, message);
     });
 
+    //dipen
+    controller.hears(['dipen','patel'],['ambient,direct_message'],(bot,message) => {
+        getImage('patel', bot, message);
+    });
+
     //karl
-    controller.hears(['karl'],['ambient,direct_message'],(bot,message) => {
+    controller.hears(['karl','schroepfer'],['ambient,direct_message'],(bot,message) => {
         getImage('karl schroepfer', bot, message);
     });
 
+    //omar
+    controller.hears(['omar','andrade'],['ambient,direct_message'],(bot,message) => {
+        getImage('momar', bot, message);
+    });
+
     //eric
-    controller.hears(['eric'],['ambient,direct_message'],(bot,message) => {
+    controller.hears(['eric','erik','peterik'],['ambient,direct_message'],(bot,message) => {
         getImage('metamucil', bot, message);
     });
 

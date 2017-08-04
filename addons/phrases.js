@@ -150,8 +150,7 @@ module.exports = () => {
         "I spy with my little eye...",
         "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         "https://www.youtube.com/watch?v=1qN72LEQnaU",
-        "https://www.youtube.com/watch?v=QH2-TGUlwu4",
-        ""
+        "https://www.youtube.com/watch?v=QH2-TGUlwu4"
     ];
 
     return new Promise((resolve, reject) => {
