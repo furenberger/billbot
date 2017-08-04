@@ -20,7 +20,7 @@ const getTone = (text, toneAnalyzer) => {
         if(process.env.TONE_ENABLED === 'true') {
             //API call to tone analyzer
             toneAnalyzer.tone({
-                text: text
+                text: text ? text : 'bill'
             }, (error, data) => {
                 if (error) {
                     reject(error);

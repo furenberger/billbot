@@ -168,12 +168,8 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
     //call a promise based function (tone API) and then do work.
     toneDetection.getTone(text, toneAnalyzer)
         .then(((tone) => {
-            speak()
-                .then((text) => {
-                    bot.reply(message, text);
-                });
-
             //tones are limited to anger, disgust, fear, joy, and sadness, neutral
+            debug('tone:', tone);
             switch(tone){
                 case 'anger':
                 {
@@ -201,6 +197,10 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                 }
                 case 'joy':
                 {
+                    speak()
+                        .then((text) => {
+                            bot.reply(message, text);
+                        });
                     giphy()
                         .then((quote) => {
                             bot.reply(message, quote);
@@ -217,11 +217,19 @@ slackController.hears(['bill'],['ambient,direct_message,direct_mention,mention']
                 }
                 case 'neutral':
                 {
+                    speak()
+                        .then((text) => {
+                            bot.reply(message, text);
+                        });
                     emoji(bot, message);
                     break;
                 }
                 default:
                 {
+                    speak()
+                        .then((text) => {
+                            bot.reply(message, text);
+                        });
                     //we dont have to do something every time...
                     break;
                 }

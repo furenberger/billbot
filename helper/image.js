@@ -90,7 +90,7 @@ module.exports = (searchString) => {
         googleImage()
             .then((url) => {
                 //success on googles
-                resolve(url)
+                resolve(url);
             }).catch((err) => {
                 debug('the googles had issues:' + err);
                 flickrImage()

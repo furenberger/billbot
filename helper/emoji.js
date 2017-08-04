@@ -38,7 +38,19 @@ module.exports = (bot, message, specific) => {
         'hypnotoad2',
         'i_see_what_you_did_there',
         'imposibru',
-        'you_dont_say'
+        'you_dont_say',
+        'captain_obvious',
+        'companion_cube',
+        'dealwithitparrot',
+        'evil',
+        'gronk',
+        'hammer_time',
+        'ohyeah',
+        'ron_swanson',
+        'thisisfine',
+        'worst_ever'
+
+
     ];
     const index = randomnumber(0, emoji.length);
     let pickedEmoji = emoji[index];

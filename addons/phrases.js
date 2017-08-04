@@ -145,7 +145,7 @@ module.exports = () => {
         "Arm candy.",
         "As luck would have it",
         "Butter wont melt in his mouth",
-        "Cbop-Chop",
+        "Chop-Chop",
         "Im sorry Dave, Im afraid I cant do that",
         "I spy with my little eye...",
         "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
