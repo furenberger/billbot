@@ -86,13 +86,14 @@ const searchChannel = () => {
             debug('Found current channel (from list) ' + CHANNELS[activeChannel].team + ' ' + CHANNELS[activeChannel].channel + ' ' + CHANNELS[activeChannel].name);
 
             setTimeout(() => {
-                giphy().then((url) => {
+                chuckNorris().then((quote) => {
                     slackBot.say(
                         {
-                            text: url,
+                            text: quote,
                             channel: CHANNELS[activeChannel].channel
                         });
                 });
+
             }, randomnumber(0, 30000));
 
 
