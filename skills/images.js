@@ -42,6 +42,11 @@ module.exports = (controller) => {
         getImage('metamucil', bot, message);
     });
 
+    //pedobear
+    controller.hears(['pedobear'],['ambient,direct_message'],(bot,message) => {
+        getImage('meme', bot, message);
+    });
+
     //allow user to say image {search}
     controller.hears(['image'],['ambient,direct_message'],(bot,message) => {
         let text = message.text;
