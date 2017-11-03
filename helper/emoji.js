@@ -48,8 +48,6 @@ module.exports = (bot, message, specific) => {
         'ron_swanson',
         'thisisfine',
         'worst_ever'
-
-
     ];
     const index = randomnumber(0, emoji.length);
     let pickedEmoji = emoji[index];
