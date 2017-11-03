@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon billbot.js",
-    "dev": "DEBUG=billbot* nodemon billbot.js"
+    "start": "node billbot.js",
+    "startDev": "DEBUG=billbot* node billbot.js",
+    "startDev:nodemon": "DEBUG=billbot* nodemon billbot.js"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,9 @@
   },
   "homepage": "https://github.com/furenberger/billbot#readme",
   "dependencies": {
-    "botkit": "^0.5.7",
+    "botkit": "^0.6.5",
     "cheerio": "^1.0.0-rc.2",
-    "debug": "^2.6.8",
+    "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "node-schedule": "^1.2.4",
     "request": "^2.81.0",
