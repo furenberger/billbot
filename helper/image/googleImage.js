@@ -2,22 +2,17 @@
 const debug = require('debug')('billbot:googleImage');
 const request = require('request');
 
-let fixieRequest;
-
-if(process.env.NODE_ENV !== 'development'){
-    fixieRequest = request.defaults({'proxy': process.env.FIXIE_URL});    
-} else {
-    fixieRequest = request.defaults({});    
-}
-
 module.exports = (googleUrl, pick) => {
   return new Promise((resolve, reject) => {
-    debug('googleUrl: ', googleUrl);
+    // debug('googleUrl: ', googleUrl);
 
-    fixieRequest(googleUrl,
-          (error, response, body) => {
+    const options = {
+        method : 'GET',
+        url    : googleUrl,
+    };
+    
+    request(options,(error, response, body) => {
             debug('error: ', error);
-            //debug('response: ', response);
             debug('body: ', body);
 
             if (!error && response.statusCode === 200) {
@@ -34,6 +29,6 @@ module.exports = (googleUrl, pick) => {
                 // console.log("Google error: ", jsonErrorBody.error.message);
                 reject();
             }
-        }).end('{}');
+        });
   });
 };
