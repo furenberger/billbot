@@ -1,4 +1,3 @@
-'use strict';
 const debug = require('debug')('billbot:images');
 const image = require('../helper/image');
 

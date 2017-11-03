@@ -1,4 +1,3 @@
-'use strict';
 const request = require('request');
 const debug = require('debug')('billbot:quote');
 const cheerio = require('cheerio');

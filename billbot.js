@@ -5,7 +5,6 @@
 
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-'use strict';
 const debug = require('debug')('billbot:billbot');
 require('dotenv').load();
 
@@ -14,10 +13,9 @@ if (!process.env.token) {
     process.exit(1);
 }
 
-const request = require('request');
-
 console.log("TONE_ENABLED: " + process.env.TONE_ENABLED);
 console.log("GOOGLE_API_ENABLED: " + process.env.GOOGLE_API_ENABLED);
+console.log("NODE_ENV: " + process.env.NODE_ENV);
 
 const chuckNorris = require('./helper/chucknorris');
 const emoji = require('./helper/emoji');
@@ -76,7 +74,7 @@ const searchChannel = () => {
         {
             channel: CHANNELS[activeChannel].channel
         },
-        (err,response) => {
+        (err, response) => {
             if(err){
                 debug('error looking at channel: ' + activeChannel);
                 activeChannel = activeChannel + 1;
@@ -85,28 +83,28 @@ const searchChannel = () => {
 
             debug('Found current channel (from list) ' + CHANNELS[activeChannel].team + ' ' + CHANNELS[activeChannel].channel + ' ' + CHANNELS[activeChannel].name);
 
-            setTimeout(() => {
-                chuckNorris().then((quote) => {
-                    slackBot.say(
-                        {
-                            text: quote,
-                            channel: CHANNELS[activeChannel].channel
-                        });
-                });
+            // setTimeout(() => {
+            //     chuckNorris().then((quote) => {
+            //         slackBot.say(
+            //             {
+            //                 text: quote,
+            //                 channel: CHANNELS[activeChannel].channel
+            //             });
+            //     });
 
-            }, randomnumber(0, 30000));
+            // }, randomnumber(0, 30000));
 
 
-            setTimeout(() => {
-                quote().then((quote) => {
-                    slackBot.say(
-                        {
-                            text: quote,
-                            channel: CHANNELS[activeChannel].channel
-                        }
-                    )
-                });
-            }, randomnumber(0, 100000));
+            // setTimeout(() => {
+            //     quote().then((quote) => {
+            //         slackBot.say(
+            //             {
+            //                 text: quote,
+            //                 channel: CHANNELS[activeChannel].channel
+            //             }
+            //         )
+            //     });
+            // }, randomnumber(0, 100000));
 
             //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
             schedule.scheduleJob('47 15 * * *', () => {

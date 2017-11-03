@@ -1,4 +1,3 @@
-'use strict';
 const debug = require('debug')('billbot:tone_detection');
 
 /**
@@ -53,19 +52,16 @@ const getTone = (text, toneAnalyzer) => {
 const getEmotionTone = (emotionTone) => {
     let maxScore = 0.0;
     let primaryEmotion = null;
-    let primaryEmotionScore = null;
 
     emotionTone.tones.forEach((tone) => {
         if (tone.score > maxScore) {
             maxScore = tone.score;
             primaryEmotion = tone.tone_name.toLowerCase();
-            primaryEmotionScore = tone.score;
         }
     });
 
     if (maxScore <= PRIMARY_EMOTION_SCORE_THRESHOLD) {
         primaryEmotion = 'neutral';
-        primaryEmotionScore = null;
     }
 
     //just return that emotion

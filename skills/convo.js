@@ -1,6 +1,4 @@
-'use strict';
 const debug = require('debug')('billbot:convo');
-const request = require('request');
 
 /*
  a sample conversation

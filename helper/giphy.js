@@ -1,4 +1,3 @@
-'use strict';
 const debug = require('debug')('billbot:giphy');
 const request = require('request');
 

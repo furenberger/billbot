@@ -1,5 +1,4 @@
-'use strict';
-const debug = require('debug')('billbot:response');
+const debug = require('debug')('billbot:phrases');
 const randomnumber = require('./randomnumber');
 
 module.exports = () => {

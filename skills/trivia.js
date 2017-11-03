@@ -1,4 +1,3 @@
-'use strict';
 const debug = require('debug')('billbot:trivia');
 const request = require('request');
 

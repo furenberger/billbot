@@ -1,4 +1,3 @@
-'use strict';
 const debug = require('debug')('billbot:emoji');
 const randomnumber = require('../addons/randomnumber');
 

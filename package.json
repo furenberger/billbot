@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node billbot.js",
-    "startDev": "DEBUG=billbot* node billbot.js",
-    "startDev:nodemon": "DEBUG=billbot* nodemon billbot.js"
+    "startDev": "DEBUG=billbot* NODE_ENV=development node billbot.js",
+    "startDev:nodemon": "DEBUG=billbot* NODE_ENV=development nodemon billbot.js"
   },
   "repository": {
     "type": "git",
@@ -27,9 +27,8 @@
     "cheerio": "^1.0.0-rc.2",
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
-    "node-schedule": "^1.2.4",
-    "request": "^2.81.0",
-    "socks": "^1.1.10",
-    "watson-developer-cloud": "^2.37.0"
+    "node-schedule": "^1.2.5",
+    "request": "^2.83.0",
+    "watson-developer-cloud": "^2.42.0"
   }
 }

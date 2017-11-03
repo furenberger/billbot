@@ -1,6 +1,4 @@
-'use strict';
 const debug = require('debug')('billbot:speak');
-const request = require('request');
 const getPhrase = require('../addons/phrases');
 
 module.exports = () => {
