@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node billbot.js",
-    "startDev": "DEBUG=billbot* NODE_ENV=development node billbot.js",
-    "startDev:nodemon": "DEBUG=billbot* NODE_ENV=development nodemon billbot.js"
+    "startDev": "set DEBUG=billbot* && set NODE_ENV=development && node billbot.js",
+    "startDev:nodemon": "set DEBUG=billbot* && set NODE_ENV=development && nodemon billbot.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "url": "https://github.com/furenberger/billbot/issues"
   },
   "engines": {
-    "node": "6.11.1"
+    "node": "8.9.0"
   },
   "homepage": "https://github.com/furenberger/billbot#readme",
   "dependencies": {
