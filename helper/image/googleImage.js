@@ -7,8 +7,11 @@ module.exports = (googleUrl, pick) => {
     // debug('googleUrl: ', googleUrl);
 
     const options = {
-        method : 'GET',
-        url    : googleUrl,
+        method   : 'GET',
+        url      : googleUrl,
+        headers : {
+            Referer  : process.env.referer
+        }
     };
     
     request(options,(error, response, body) => {
