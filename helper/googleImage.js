@@ -5,7 +5,7 @@ const request = require('request');
 let fixieRequest;
 
 if(process.env.NODE_ENV !== 'development'){
-    fixieRequest = request.defaults({'proxy': process.env.FIXIE_HOST});    
+    fixieRequest = request.defaults({'proxy': process.env.FIXIE_URL});    
 } else {
     fixieRequest = request.defaults({});    
 }
@@ -13,11 +13,8 @@ if(process.env.NODE_ENV !== 'development'){
 module.exports = (googleUrl, pick) => {
   return new Promise((resolve, reject) => {
     debug('googleUrl: ', googleUrl);
-  
-    fixieRequest({
-            method: 'GET',
-            url: googleUrl
-        },
+
+    fixieRequest(googleUrl,
           (error, response, body) => {
             debug('error: ', error);
             //debug('response: ', response);

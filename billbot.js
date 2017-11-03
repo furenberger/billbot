@@ -83,28 +83,28 @@ const searchChannel = () => {
 
             debug('Found current channel (from list) ' + CHANNELS[activeChannel].team + ' ' + CHANNELS[activeChannel].channel + ' ' + CHANNELS[activeChannel].name);
 
-            setTimeout(() => {
-                chuckNorris().then((quote) => {
-                    slackBot.say(
-                        {
-                            text: quote,
-                            channel: CHANNELS[activeChannel].channel
-                        });
-                });
+            // setTimeout(() => {
+            //     chuckNorris().then((quote) => {
+            //         slackBot.say(
+            //             {
+            //                 text: quote,
+            //                 channel: CHANNELS[activeChannel].channel
+            //             });
+            //     });
 
-            }, randomnumber(0, 30000));
+            // }, randomnumber(0, 30000));
 
 
-            setTimeout(() => {
-                quote().then((quote) => {
-                    slackBot.say(
-                        {
-                            text: quote,
-                            channel: CHANNELS[activeChannel].channel
-                        }
-                    )
-                });
-            }, randomnumber(0, 100000));
+            // setTimeout(() => {
+            //     quote().then((quote) => {
+            //         slackBot.say(
+            //             {
+            //                 text: quote,
+            //                 channel: CHANNELS[activeChannel].channel
+            //             }
+            //         )
+            //     });
+            // }, randomnumber(0, 100000));
 
             //Bill becomes sentient on his own today at this time, every day rip on epeterik. '24 15 * * *'
             schedule.scheduleJob('47 15 * * *', () => {
