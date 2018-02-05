@@ -15,7 +15,7 @@ module.exports = () => {
                 //http://autoinsult.datahamster.com/index.php?style=3
                 //<?xml version="1.0" encoding="utf-8" ?><xjx><cmd n="as" t="insult" p="innerHTML"><![CDATA[You gruesome box of hideous dog barf]]></cmd></xjx>
                 request({
-                        method: 'get',
+                        method: 'GET',
                         url: 'http://autoinsult.datahamster.com/scripts/webinsult.server.php?xajax=generate_insult&xajaxargs[]=3&xajaxr=1490819484403'
                     },
                     (error, response, body) => {
@@ -33,9 +33,11 @@ module.exports = () => {
         }
         case 1: {
             return new Promise((resolve, reject) => {
+                debug('Insult 1');
                 request({
-                        method: 'get',
-                        url: 'http://www.robietherobot.com/insult-generator.htm'
+                        method: 'GET',
+                        url: 'http://www.robietherobot.com/insult-generator.htm',
+                        strictSSL: false
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
@@ -48,14 +50,17 @@ module.exports = () => {
                         }
                     }).end('{}');
             }).catch((error) => {
-                debug('promise error: ', error);
+                debug('promise error1: ', error);
             });
         }
         case 2: {
             return new Promise((resolve, reject) => {
+                debug('Insult 2');
+                
                 request({
-                        method: 'get',
-                        url: 'http://www.pangloss.com/seidel/Shaker'
+                        method: 'GET',
+                        url: 'http://www.pangloss.com/seidel/Shaker',
+                        strictSSL: false
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
@@ -68,14 +73,17 @@ module.exports = () => {
                         }
                     }).end('{}');
             }).catch((error) => {
-                debug('promise error: ', error);
+                debug('promise error2: ', error);
             });
         }
         case 3: {
             return new Promise((resolve, reject) => {
+                debug('Insult 3');
+                
                 request({
-                        method: 'get',
-                        url: 'https://www.insult-generator.org/'
+                        method: 'GET',
+                        url: 'https://www.insult-generator.org/',
+                        strictSSL: false
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
@@ -88,7 +96,7 @@ module.exports = () => {
                         }
                     }).end('{}');
             }).catch((error) => {
-                debug('promise error: ', error);
+                debug('promise error3: ', error);
             });
         }
     }
