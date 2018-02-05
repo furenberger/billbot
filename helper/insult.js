@@ -33,9 +33,11 @@ module.exports = () => {
         }
         case 1: {
             return new Promise((resolve, reject) => {
+                debug('Insult 1');
                 request({
                         method: 'GET',
-                        url: 'http://www.robietherobot.com/insult-generator.htm'
+                        url: 'http://www.robietherobot.com/insult-generator.htm',
+                        strictSSL: false
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
@@ -48,14 +50,17 @@ module.exports = () => {
                         }
                     }).end('{}');
             }).catch((error) => {
-                debug('promise error: ', error);
+                debug('promise error1: ', error);
             });
         }
         case 2: {
             return new Promise((resolve, reject) => {
+                debug('Insult 2');
+                
                 request({
                         method: 'GET',
-                        url: 'http://www.pangloss.com/seidel/Shaker'
+                        url: 'http://www.pangloss.com/seidel/Shaker',
+                        strictSSL: false
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
@@ -68,14 +73,17 @@ module.exports = () => {
                         }
                     }).end('{}');
             }).catch((error) => {
-                debug('promise error: ', error);
+                debug('promise error2: ', error);
             });
         }
         case 3: {
             return new Promise((resolve, reject) => {
+                debug('Insult 3');
+                
                 request({
                         method: 'GET',
-                        url: 'https://www.insult-generator.org/'
+                        url: 'https://www.insult-generator.org/',
+                        strictSSL: false
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
@@ -88,7 +96,7 @@ module.exports = () => {
                         }
                     }).end('{}');
             }).catch((error) => {
-                debug('promise error: ', error);
+                debug('promise error3: ', error);
             });
         }
     }
