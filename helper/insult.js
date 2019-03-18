@@ -16,12 +16,13 @@ module.exports = () => {
                 //<?xml version="1.0" encoding="utf-8" ?><xjx><cmd n="as" t="insult" p="innerHTML"><![CDATA[You gruesome box of hideous dog barf]]></cmd></xjx>
                 request({
                         method: 'GET',
-                        url: 'http://autoinsult.datahamster.com/scripts/webinsult.server.php?xajax=generate_insult&xajaxargs[]=3&xajaxr=1490819484403'
+                        url: 'http://autoinsult.com/scripts/webinsult.server.php?xajax=generate_insult&xajaxargs[]=3&xajaxr=1552929250415'
                     },
                     (error, response, body) => {
                         if (!error && response.statusCode === 200) {
                             debug('BODY: ', body);
                             const insult = body.substring(body.indexOf('[CDATA[') + 7, body.indexOf(']]'));
+
                             resolve(insult.trim());
                         } else {
                             reject(error);
@@ -56,7 +57,7 @@ module.exports = () => {
         case 2: {
             return new Promise((resolve, reject) => {
                 debug('Insult 2');
-                
+
                 request({
                         method: 'GET',
                         url: 'http://www.pangloss.com/seidel/Shaker',
@@ -79,7 +80,7 @@ module.exports = () => {
         case 3: {
             return new Promise((resolve, reject) => {
                 debug('Insult 3');
-                
+
                 request({
                         method: 'GET',
                         url: 'https://www.insult-generator.org/',

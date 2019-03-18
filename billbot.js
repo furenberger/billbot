@@ -61,6 +61,11 @@ const CHANNELS = [
         name     : '#general'
     },
     {
+        team     : 'weUsedToRunAnnuities',
+        channel  : 'CH3FP8PQF',
+        name     : '#bot_testing'
+    },
+    {
         team     : 'furenberger',
         channel  : 'C4SKTL527',
         name     : '#bill_testing'
