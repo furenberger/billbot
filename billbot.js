@@ -6,7 +6,7 @@
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 const debug = require("debug")("billbot:billbot");
-require("dotenv").load();
+require("dotenv").config();
 
 if (!process.env.token) {
   console.log("Error: Specify token in environment");
